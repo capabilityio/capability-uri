@@ -7,15 +7,15 @@
         "test": "npm run assert-latest-node && jest"
     },
     "scriptvars": {
-        "latest_node": "v8.4.0"
+        "latest_node": "v8.6.0"
     },
     "main": "index.js",
     "devDependencies": {
-        "jest": "21.0.1",
+        "jest": "21.2.1",
         "urlsafe-base64": "1.0.0"
     },
     "dependencies": {
-        "capability-token": "0.3.0"
+        "capability-token": "0.4.0"
     },
     "contributors": [
         "Tristan Slominski <tristan.slominski@gmail.com>"
