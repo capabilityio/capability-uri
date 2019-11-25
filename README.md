@@ -84,15 +84,15 @@ cpblty:DkDvHuU78RZGUeNs3Q-Wsw:CPBLTY1-IbwNerN4Dw4BYlpYc4Az-pNBWen_WsdrTrpb-HmMiJ
 
 ```javascript
 const CapabilityToken = require("capability-token");
-const CapabilityUri = require("capability-uri");
+const CapabilityURI = require("capability-uri");
 const crypto = require("crypto");
 const UrlSafeBase64 = require("urlsafe-base64");
 
-const uri1 = CapabilityUri.parse(`cpblty://example.com/#${new CapabilityToken().serialize()}`);
+const uri1 = CapabilityURI.parse(`cpblty://example.com/#${new CapabilityToken().serialize()}`);
 console.log(uri1);
 console.log(uri1.serialize());
 
-const uri2 = new CapabilityUri(
+const uri2 = new CapabilityURI(
     {
         authority: "example.com",
         capabilityToken: new CapabilityToken()
@@ -101,7 +101,7 @@ const uri2 = new CapabilityUri(
 console.log(uri2);
 console.log(uri2.serialize());
 
-const uri3 = new CapabilityUri(
+const uri3 = new CapabilityURI(
     {
         capabilityAuthority: UrlSafeBase64.encode(crypto.randomBytes(64)),
         capabilityToken: new CapabilityToken()
@@ -110,7 +110,7 @@ const uri3 = new CapabilityUri(
 console.log(uri3);
 console.log(uri3.serialize());
 
-const uri4 = new CapabilityUri(
+const uri4 = new CapabilityURI(
     {
         authorityScheme: "dht",
         capabilityAuthority: UrlSafeBase64.encode(crypto.randomBytes(64)),
@@ -123,7 +123,7 @@ console.log(uri4.serialize());
 
 ## Documentation
 
-### CapabilityUri
+### CapabilityURI
 
 #### IP/DNS Capability URI
 
@@ -137,25 +137,25 @@ console.log(uri4.serialize());
   * `capabilityToken`: _CapabilityToken_ `CapabilityToken` instance.
 
 **Public API**
-  * [CapabilityUri.parse(uri)](#capabilityuriparseuri)
-  * [new CapabilityUri(config)](#new-capabilityuriconfig)
+  * [CapabilityURI.parse(uri)](#capabilityuriparseuri)
+  * [new CapabilityURI(config)](#new-capabilityuriconfig)
   * [capabilityUri.serialize()](#capabilityuriserialize)
 
-#### CapabilityUri.parse(uri)
+#### CapabilityURI.parse(uri)
 
   * `uri`: _String_ String capability URI to parse.
-  * Return: _CapabilityUri_ Parsed capability URI, either IP/DNS type or Other type.
+  * Return: _CapabilityURI_ Parsed capability URI, either IP/DNS type or Other type.
 
-#### new CapabilityUri(config)
+#### new CapabilityURI(config)
 
   * `config`: _Object_ configuration.
     * `authority`: _String_ Domain containing the capability specified by the `capabilityToken`. For full specification of `authority`, see [RFC 3986, Section 3.2 - Authority](https://tools.ietf.org/html/rfc3986#section-3.2). Mutually exclusive with `capabilityAuthority`.
     * `authorityScheme`: _String_ _(Default: undefined)_ Optional authority scheme.
     * `capabilityAuthority`: _String_ Base64url encoded authority containing the capability specified by the `capabilityToken`. Mutually exclusive with `authority`.
     * `capabilityToken`: _CapabilityToken_ `CapabilityToken` instance.
-  * Return: _CapabilityUri_ Capability URI instance as configured.
+  * Return: _CapabilityURI_ Capability URI instance as configured.
 
-Creates a new `CapabilityUri` instance as configured.
+Creates a new `CapabilityURI` instance as configured.
 
 #### capabilityUri.serialize()
 

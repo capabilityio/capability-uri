@@ -3,7 +3,7 @@
 const assert = require("assert");
 const CapabilityToken = require("capability-token");
 
-const CapabilityUri = module.exports = function(config)
+const CapabilityURI = module.exports = function(config)
 {
     const self = this;
     assert.ok(config.authority || config.capabilityAuthority);
@@ -31,30 +31,30 @@ const CapabilityUri = module.exports = function(config)
     }
 };
 
-CapabilityUri.CUSTOM_URI_REGEX = new RegExp(`^cpblty:(${CapabilityToken.BASE64URL_REGEX.source})((?:@[-_A-Za-z0-9]+)?):(${CapabilityToken.TOKEN_REGEX.source.slice(1)})`);
-CapabilityUri.NON_CUSTOM_URI_REGEX = new RegExp(`^cpblty:\/\/([^\/]{3,})/#(${CapabilityToken.TOKEN_REGEX.source.slice(1)})`);
+CapabilityURI.CUSTOM_URI_REGEX = new RegExp(`^cpblty:(${CapabilityToken.BASE64URL_REGEX.source})((?:@[-_A-Za-z0-9]+)?):(${CapabilityToken.TOKEN_REGEX.source.slice(1)})`);
+CapabilityURI.NON_CUSTOM_URI_REGEX = new RegExp(`^cpblty:\/\/([^\/]{3,})/#(${CapabilityToken.TOKEN_REGEX.source.slice(1)})`);
 
-CapabilityUri.parse = uri =>
+CapabilityURI.parse = uri =>
 {
-    const nonCustomParsed = CapabilityUri.NON_CUSTOM_URI_REGEX.exec(uri);
+    const nonCustomParsed = CapabilityURI.NON_CUSTOM_URI_REGEX.exec(uri);
     if (nonCustomParsed)
     {
         // nonCustomParsed[1] is authority
         // nonCustomParsed[2] is CapabilityToken
-        return new CapabilityUri(
+        return new CapabilityURI(
             {
                 authority: nonCustomParsed[1],
                 capabilityToken: CapabilityToken.parse(nonCustomParsed[2])
             }
         );
     }
-    const customParsed = CapabilityUri.CUSTOM_URI_REGEX.exec(uri);
+    const customParsed = CapabilityURI.CUSTOM_URI_REGEX.exec(uri);
     if (customParsed)
     {
         // customParsed[1] is capabilityAuthority
         // customParsed[2] is authorityScheme
         // customParsed[3] is CapabilityToken
-        return new CapabilityUri(
+        return new CapabilityURI(
             {
                 authorityScheme: customParsed[2].length > 0 ? customParsed[2].slice(1) : undefined,
                 capabilityAuthority: customParsed[1],
@@ -65,7 +65,7 @@ CapabilityUri.parse = uri =>
     return false;
 };
 
-CapabilityUri.prototype.serialize = function()
+CapabilityURI.prototype.serialize = function()
 {
     const self = this;
     if (self.authority)
@@ -76,5 +76,5 @@ CapabilityUri.prototype.serialize = function()
     {
         return `cpblty:${self.capabilityAuthority}${self.authorityScheme ? `@${self.authorityScheme}` : ""}:${self.capabilityToken.serialize()}`
     }
-    throw new Error("Invalid CapabilityUri");
+    throw new Error("Invalid CapabilityURI");
 };

@@ -2,62 +2,62 @@
 
 const CapabilityToken = require("capability-token");
 const crypto = require("crypto");
-const UrlSafeBase64 = require("urlsafe-base64");
+const URLSafeBase64 = require("urlsafe-base64");
 
-const CapabilityUri = require("../index.js");
+const CapabilityURI = require("../index.js");
 
 test("serializes and parses IP URI", () =>
     {
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authority: "127.0.0.1",
                 capabilityToken: token
             }
         );
-        expect(CapabilityUri.parse(uri.serialize())).toEqual(uri);
+        expect(CapabilityURI.parse(uri.serialize())).toEqual(uri);
     }
 );
 
 test("serializes and parses DNS URI", () =>
     {
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authority: "example.com",
                 capabilityToken: token
             }
         );
-        expect(CapabilityUri.parse(uri.serialize())).toEqual(uri);
+        expect(CapabilityURI.parse(uri.serialize())).toEqual(uri);
     }
 );
 
 test("serializes and parses capability authority URI", () =>
     {
-        const capabilityAuthority = UrlSafeBase64.encode(crypto.randomBytes(64));
+        const capabilityAuthority = URLSafeBase64.encode(crypto.randomBytes(64));
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 capabilityAuthority,
                 capabilityToken: token
             }
         );
-        expect(CapabilityUri.parse(uri.serialize())).toEqual(uri);
+        expect(CapabilityURI.parse(uri.serialize())).toEqual(uri);
     }
 );
 
 test("serializes and parses capability authority with authority scheme URI", () =>
     {
         const authorityScheme = "dht";
-        const capabilityAuthority = UrlSafeBase64.encode(crypto.randomBytes(64));
+        const capabilityAuthority = URLSafeBase64.encode(crypto.randomBytes(64));
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authorityScheme,
                 capabilityAuthority,
                 capabilityToken: token
             }
         );
-        expect(CapabilityUri.parse(uri.serialize())).toEqual(uri);
+        expect(CapabilityURI.parse(uri.serialize())).toEqual(uri);
     }
 );

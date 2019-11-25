@@ -7,7 +7,7 @@
         "test": "npm run assert-latest-node && jest"
     },
     "scriptvars": {
-        "latest_node": "v12.9.0"
+        "latest_node": "v13.2.0"
     },
     "main": "index.js",
     "devDependencies": {

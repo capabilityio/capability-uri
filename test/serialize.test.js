@@ -2,14 +2,14 @@
 
 const CapabilityToken = require("capability-token");
 const crypto = require("crypto");
-const UrlSafeBase64 = require("urlsafe-base64");
+const URLSafeBase64 = require("urlsafe-base64");
 
-const CapabilityUri = require("../index.js");
+const CapabilityURI = require("../index.js");
 
 test("serializes IP URI", () =>
     {
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authority: "127.0.0.1",
                 capabilityToken: token
@@ -22,7 +22,7 @@ test("serializes IP URI", () =>
 test("serializes DNS URI", () =>
     {
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authority: "example.com",
                 capabilityToken: token
@@ -34,9 +34,9 @@ test("serializes DNS URI", () =>
 
 test("serializes capability authority URI", () =>
     {
-        const capabilityAuthority = UrlSafeBase64.encode(crypto.randomBytes(64));
+        const capabilityAuthority = URLSafeBase64.encode(crypto.randomBytes(64));
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 capabilityAuthority,
                 capabilityToken: token
@@ -49,9 +49,9 @@ test("serializes capability authority URI", () =>
 test("serializes capability authority with authority scheme URI", () =>
     {
         const authorityScheme = "dht";
-        const capabilityAuthority = UrlSafeBase64.encode(crypto.randomBytes(64));
+        const capabilityAuthority = URLSafeBase64.encode(crypto.randomBytes(64));
         const token = new CapabilityToken();
-        const uri = new CapabilityUri(
+        const uri = new CapabilityURI(
             {
                 authorityScheme,
                 capabilityAuthority,
